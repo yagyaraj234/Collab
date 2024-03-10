@@ -1,12 +1,22 @@
-'use client'
+"use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Bell, ChevronDown, Grip, HelpCircle, Search, Settings, Handshake } from "lucide-react";
+import {
+  Bell,
+  ChevronDown,
+  Grip,
+  HelpCircle,
+  Search,
+  Settings,
+  Handshake,
+} from "lucide-react";
 import WorkCard from "./Cards/WorkCard";
 import ProjectCard from "./Cards/ProjectCard";
 import FilterCard from "./Cards/FilterCard";
 import TeamCard from "./Cards/TeamCard";
 import Link from "next/link";
+import Help from "./Help/Help";
+import SettingCard from "./Cards/SettingCard";
 
 const navOption = [
   {
@@ -53,13 +63,16 @@ const Navbar = () => {
         <div>
           <Grip size={20} />
         </div>
-        <Link href="/" className="font-medium text-textSecondary flex items-center cursor-pointer gap-2">
+        <Link
+          href="/"
+          className="font-medium text-textSecondary flex items-center cursor-pointer gap-2"
+        >
           <Handshake color="blue" fontWeight={24} />
           Collab{" "}
         </Link>
       </div>
 
-      <div className="flex justify-between w-full items-center text-sm">
+      <div className="flex justify-between w-full items-center text-sm relative">
         <div className="flex flex-row gap-2 text-textPrimary font-medium">
           {navOption?.map((option, index) => (
             <div
@@ -80,14 +93,19 @@ const Navbar = () => {
               {option.name}
               <ChevronDown size={16} className="bg-red-40 -mr-1" />
               {selectedNavOption === option.name && (
-                <div className="absolute top-12 left-0 bg-white rounded-md shadow-xl z-10" ref={ref}>
+                <div
+                  className="absolute top-12 left-0 bg-white rounded-md shadow-xl z-10"
+                  ref={ref}
+                >
                   {option.component}
                 </div>
               )}
             </div>
           ))}
 
-          <div className="bg-primary text-white px-4 py-2 rounded-md">Create</div>
+          <div className="bg-primary text-white px-4 py-2 rounded-md">
+            Create
+          </div>
         </div>
 
         <div className="flex gap-2 items-center">
@@ -95,19 +113,43 @@ const Navbar = () => {
             <Search size={20} />
             <input type="text" placeholder="Search" className="outline-none" />
           </div>
-          <div className="-rotate-5">
+          <div className="-rotate-5 cursor-pointer">
             <Bell />
           </div>
 
-          <div>
+          <div
+            onClick={() => setSelectedNavOption("help")}
+            className="relative cursor-pointer"
+          >
             <HelpCircle />
           </div>
 
-          <div>
+          <div
+            className="cursor-pointer relative"
+            onClick={() => setSelectedNavOption("Setting")}
+          >
             <Settings />
+
+            {selectedNavOption === "Setting" && (
+              <div
+                className="absolute top-12 right-[56px] bg-white rounded-md shadow-xl z-10 p-6 border"
+                ref={ref}
+              >
+                <SettingCard />
+              </div>
+            )}
           </div>
 
-          <div className="h-[28px] w-[28px] font-bold bg-textSecondary flex items-center justify-center text-white rounded-full">
+          {selectedNavOption === "help" && (
+            <div
+              className="absolute  -right-6  top-[53px] min-w-[30vw] "
+              ref={ref}
+            >
+              <Help setSelectedNavOption={setSelectedNavOption} />
+            </div>
+          )}
+
+          <div className="h-[28px] w-[28px] font-bold bg-textSecondary flex items-center justify-center text-white rounded-full cursor-pointer">
             Y
           </div>
         </div>

@@ -16,7 +16,7 @@ const Button = ({ name }: ButtonProps) => {
 };
 const ProjectCard = () => {
   return (
-    <div className="flex flex-col gap-2 border-0 border-slate-200 text-textPrimary">
+    <div className="flex flex-col gap-2 border-0 border-slate-200 text-textPrimary z-50">
       <div className="flex flex-col gap-4 px-4">
         <div className="text-md font-semibold mb-4">Recent</div>
 

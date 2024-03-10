@@ -39,13 +39,13 @@ const helpItems = [
 ]
 
 
-const Help = () => {
+const Help = ({setSelectedNavOption}:any) => {
   return (
     
-        <div className="flex flex-col gap-4  max-w-[30%] relative min-h-[calc(100vh-70px)] ">
+        <div className="flex flex-col gap-4  w-full relative min-h-[calc(100vh-72px)] border-l-2 border-tertiary bg-white z-1">
             <div className="text-2xl font-bold px-4 bg-secondary py-2 flex justify-between items-center border-b-2 border-tertiary">
                 <div>Help</div>
-                <X  fontSize={16} color='#44546F' className='cursor-pointer'/>
+                <X  fontSize={16} color='#44546F' className='cursor-pointer' onClick={()=>setSelectedNavOption('')}/>
             </div>
             <div className="flex flex-col ">
             {helpItems.map((item, index) => (
@@ -60,7 +60,7 @@ const Help = () => {
 
             {/* Footer */}
 
-            <div className='absolute bottom-0 flex flex-col gap-4 items-center justify-center bg-secondary text-sm w-full py-6 border-t-2 border-tertiary'>
+            <div className='absolute bottom-0 flex flex-col gap-4 items-center justify-center bg-secondary text-sm w-full py-6 border-t-2 border-tertiary '>
 
                 <div className='flex gap-4 text-textPrimary font-medium'>
 
