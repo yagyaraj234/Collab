@@ -1,17 +1,17 @@
 "use client";
 import React, { useState } from "react";
-import { Metadata } from 'next';
+import { Metadata } from "next";
 import Link from "next/link";
- 
+import { Skeleton } from "@/components/ui/skeleton";
+
 // export const metadata: Metadata = {
 //   title: 'Your Work || Collab',
- 
- 
+
 // };
 // const metadata = {
 //     title: "Your Work",
 //     description: "Your work",
-    
+
 // }
 
 const Status = () => {
@@ -38,8 +38,10 @@ const Status = () => {
             >
               {option}
 
-              {option === 'Assigned' && (
-                <div className="bg-tertiary px-3  rounded-full text-black   flex items-center justify-center text-xs">0</div>
+              {option === "Assigned" && (
+                <div className="bg-tertiary px-3  rounded-full text-black   flex items-center justify-center text-xs">
+                  0
+                </div>
               )}
             </div>
             <div
@@ -54,8 +56,6 @@ const Status = () => {
       </div>
 
       {/* Content */}
-
-      
     </div>
   );
 };
@@ -75,7 +75,10 @@ const page = () => {
           <div className="font-medium text-lg text-black mb-4">
             Recent projects
           </div>
-          <Link href="/projects" className="font-medium  cursor-pointer text-primary text-sm mb-4">
+          <Link
+            href="/projects"
+            className="font-medium  cursor-pointer text-primary text-sm mb-4"
+          >
             View all projects
           </Link>
         </div>
@@ -120,6 +123,13 @@ const page = () => {
             </div>
           </div>
         </div>
+        {/* <Skeleton className="w-[500px] h-[10px] bg-pink-300" /> */}
+
+        <div
+          className={
+            "animate-pulse rounded-md bg-primary/10 w-[500px] h-[10px] "
+          }
+        ></div>
       </div>
 
       {/* Status */}

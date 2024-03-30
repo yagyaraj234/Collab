@@ -15,9 +15,9 @@ const ComponentPage = () => {
               The all-in-one platform for project management, task tracking, and
               collaboration.
             </p>
-            <Button asChild className={`text-xl py-4`} >
+            {/* <Button asChild className={`text-xl py-4`} >
               <Link href="/sign-up">Get Started</Link>
-            </Button>
+            </Button> */}
           </div>
           <Image
             alt="workplace"
@@ -26,7 +26,8 @@ const ComponentPage = () => {
             src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fFRlYW0lMjBXb3JrfGVufDB8fDB8fHww"
           />
         </section>
-        <section className="grid items-center gap-6 text-center sm:gap-8 lg:grid-cols-3 xl:gap-12">
+
+        <section className="grid items-center gap-6 text-center sm:gap-8 lg:grid-cols-4 xl:gap-12 md:my-12 my-8">
           <div className="space-y-2">
             <ProjectorIcon className="w-12 h-12 mx-auto rounded-lg bg-gray-100 p-3 text-gray-500" />
             <h3 className="text-xl font-bold">Project Management</h3>
@@ -56,9 +57,10 @@ const ComponentPage = () => {
             </p>
           </div>
         </section>
-        <section className="grid items-center gap-6 text-center sm:gap-8 lg:grid-cols-2 xl:gap-12">
-          <div className="space-y-2">
-            <h2 className="text-3xl font-extrabold tracking-tight">
+
+        <section className="items-center justify-center w-full flex my-12">
+          <div className="space-y-2 flex flex-col items-center">
+            <h2 className="text-3xl font-extrabold tracking-tight text-center">
               Trusted by teams of all sizes
             </h2>
             <p className="text-gray-500 dark:text-gray-400">
@@ -66,7 +68,9 @@ const ComponentPage = () => {
               effectively.
             </p>
           </div>
-          <div className="grid items-center gap-6">
+        </section>
+        <section className="">
+          <div className="grid  gap-12   justify-items-center   ">
             <div className="grid items-center gap-2">
               <Image
                 alt="User"
@@ -85,37 +89,28 @@ const ComponentPage = () => {
               </blockquote>
               <cite className="font-semibold">- Alice Johnson, Team Lead</cite>
             </div>
-          </div>
-        </section>
-        <section className="grid items-center gap-6 text-center sm:gap-8 lg:grid-cols-2 xl:gap-12">
-          <div className="grid items-center gap-6">
-            <div className="grid items-center gap-2">
-              <Image
-                src={`https://images.unsplash.com/photo-1632765854612-9b02b6ec2b15?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fHBlb3BsZSUyMHBvdHJhaXR8ZW58MHx8MHx8fDA%3D`}
-                alt="User"
-                className="rounded-full"
-                height="64"
-                width="64"
-                style={{
-                  aspectRatio: "64/64",
-                  objectFit: "cover",
-                }}
-              />
-              <blockquote className="text-gray-500 italic not-italc dark:text-gray-400">
-                Acme has transformed the way our team works. We are more
-                organized, efficient, and productive than ever before.
-              </blockquote>
-              <cite className="font-semibold">- Alice Johnson, Team Lead</cite>
+            <div className="grid items-center gap-6 ">
+              <div className="grid items-center gap-2">
+                <Image
+                  src={`https://images.unsplash.com/photo-1632765854612-9b02b6ec2b15?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fHBlb3BsZSUyMHBvdHJhaXR8ZW58MHx8MHx8fDA%3D`}
+                  alt="User"
+                  className="rounded-full"
+                  height="64"
+                  width="64"
+                  style={{
+                    aspectRatio: "64/64",
+                    objectFit: "cover",
+                  }}
+                />
+                <blockquote className="text-gray-500 italic not-italc dark:text-gray-400">
+                  Acme has transformed the way our team works. We are more
+                  organized, efficient, and productive than ever before.
+                </blockquote>
+                <cite className="font-semibold">
+                  - Alice Johnson, Team Lead
+                </cite>
+              </div>
             </div>
-          </div>
-          <div className="space-y-2">
-            <h2 className="text-3xl font-extrabold tracking-tight">
-              Trusted by teams of all sizes
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400">
-              Join thousands of teams who use Acme to manage their work more
-              effectively.
-            </p>
           </div>
         </section>
       </main>

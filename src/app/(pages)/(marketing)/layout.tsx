@@ -1,14 +1,14 @@
 import Header from "./_components/Header/Header";
-
+import { ClerkProvider } from "@clerk/nextjs";
 const MarketingLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <ClerkProvider>
       {/* Header */}
       <Header />
       {children}
 
       {/* Footer */}
-    </div>
+    </ClerkProvider>
   );
 };
 

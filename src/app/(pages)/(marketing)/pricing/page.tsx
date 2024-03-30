@@ -1,9 +1,10 @@
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const PricingPage = () => {
   return (
-    <section className="grid items-center gap-6 text-center sm:gap-8 lg:grid-cols-3 xl:gap-12">
-      <div className="space-y-2">
+    <section className="flex flex-col gap-6 justify-center px-4">
+      <div className="space-y-2  flex flex-col items-center justify-center">
         <h2 className="text-3xl font-extrabold tracking-tight">
           Choose a Plan
         </h2>
@@ -11,8 +12,9 @@ const PricingPage = () => {
           Select the perfect plan for your team's needs.
         </p>
       </div>
-      <div className="space-y-2">
-        <div className="bg-gray-100 p-4 rounded-lg">
+      <div className="grid md:grid-cols-3 gap-12">
+      <div className="space-y-2  ">
+        <div className="bg-gray-100 p-4 rounded-lg flex items-center  gap-4 flex-col md:min-h-[50vh] justify-between">
           <h3 className="text-xl font-bold">Starter</h3>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             Ideal for small teams just getting started.
@@ -22,12 +24,12 @@ const PricingPage = () => {
             <span className="text-base font-normal">/month</span>
           </p>
           <Link className="btn mt-4" href="#">
-            Choose Plan
+            <Button>Choose Plan</Button>
           </Link>
         </div>
       </div>
-      <div className="space-y-2">
-        <div className="bg-gray-100 p-4 rounded-lg">
+      <div className="space-y-2 ">
+        <div className="bg-gray-100 p-4 rounded-lg flex items-center justify-between gap-4 flex-col md:min-h-[50vh]">
           <h3 className="text-xl font-bold">Pro</h3>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             Perfect for growing teams with advanced needs.
@@ -37,12 +39,12 @@ const PricingPage = () => {
             <span className="text-base font-normal">/month</span>
           </p>
           <Link className="btn mt-4" href="#">
-            Choose Plan
+          <Button>Choose Plan</Button>
           </Link>
         </div>
       </div>
-      <div className="space-y-2">
-        <div className="bg-gray-100 p-4 rounded-lg">
+      <div className="space-y-2  ">
+        <div className="bg-gray-100 p-4 rounded-lg flex items-center justify-between gap-4 flex-col md:min-h-[50vh]">
           <h3 className="text-xl font-bold">Enterprise</h3>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             Tailored solutions for large organizations.
@@ -52,9 +54,10 @@ const PricingPage = () => {
             <span className="text-base font-normal">/month</span>
           </p>
           <Link className="btn mt-4" href="#">
-            Choose Plan
+           <Button>Choose Plan</Button>
           </Link>
         </div>
+      </div>
       </div>
     </section>
   );

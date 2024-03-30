@@ -17,6 +17,7 @@ import TeamCard from "./Cards/TeamCard";
 import Link from "next/link";
 import Help from "./Help/Help";
 import SettingCard from "./Cards/SettingCard";
+import { UserButton, OrganizationSwitcher } from "@clerk/nextjs";
 
 const navOption = [
   {
@@ -60,9 +61,9 @@ const Navbar = () => {
   return (
     <div className="flex w-full items-center py-4 px-6 border-b border-slate-400 select-none dark:bg-black dark:text-white">
       <div className="flex gap-2 text-nowrap mr-4">
-        <div>
+        {/* <div>
           <Grip size={20} />
-        </div>
+        </div> */}
         <Link
           href="/"
           className="font-medium text-textSecondary flex items-center cursor-pointer gap-2"
@@ -94,7 +95,7 @@ const Navbar = () => {
               <ChevronDown size={16} className="bg-red-40 -mr-1" />
               {selectedNavOption === option.name && (
                 <div
-                  className="absolute top-12 left-0 bg-white rounded-md shadow-xl z-10"
+                  className="absolute top-12 left-0 bg-white rounded-md shadow-xl z-10 text-black"
                   ref={ref}
                 >
                   {option.component}
@@ -149,8 +150,26 @@ const Navbar = () => {
             </div>
           )}
 
-          <div className="h-[28px] w-[28px] font-bold bg-textSecondary flex items-center justify-center text-white rounded-full cursor-pointer">
-            Y
+          {/* <div className="h-[28px] w-[28px] font-bold bg-textSecondary flex items-center justify-center text-white rounded-full cursor-pointer">
+            
+          </div> */}
+          <div className="flex gap-4">
+            <OrganizationSwitcher
+              hidePersonal
+              afterCreateOrganizationUrl={"/organization/:id"}
+              afterLeaveOrganizationUrl="/select-org"
+              afterSelectOrganizationUrl={"/organization/:id"}
+              appearance={{
+                elements: {
+                  rootBox: {
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  },
+                },
+              }}
+            />
+            <UserButton afterSignOutUrl="/sign-in" />
           </div>
         </div>
       </div>
