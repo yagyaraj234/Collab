@@ -9,6 +9,8 @@ import {
   Search,
   Settings,
   Handshake,
+  X,
+  Loader2,
 } from "lucide-react";
 import WorkCard from "./Cards/WorkCard";
 import ProjectCard from "./Cards/ProjectCard";
@@ -18,6 +20,11 @@ import Link from "next/link";
 import Help from "./Help/Help";
 import SettingCard from "./Cards/SettingCard";
 import { UserButton, OrganizationSwitcher } from "@clerk/nextjs";
+import Overlay from "../Overlay/Overlay";
+import { Button } from "../ui/button";
+import { useAction } from "@/hooks/use-action";
+import { createBoard } from "../../../action/create-board";
+import { toast } from "sonner";
 
 const navOption = [
   {
@@ -40,6 +47,24 @@ const navOption = [
 
 const Navbar = () => {
   const [selectedNavOption, setSelectedNavOption] = useState("");
+  const [createBoardModal, setCreateBoardModal] = useState(false);
+
+  const { run, fieldErrors, isLoading } = useAction(createBoard, {
+    onSuccess: () => {
+      setCreateBoardModal(false);
+      toast.success("Board created successfully");
+    },
+    onError: () => {
+      console.log("error");
+    },
+  });
+
+  const onSubmit = (formData: FormData) => {
+    const title = formData.get("title") as string;
+    run({ title });
+  };
+
+  //  });
   const ref = useRef<HTMLDivElement>(null); // Add type annotation for ref
 
   useEffect(() => {
@@ -60,6 +85,58 @@ const Navbar = () => {
 
   return (
     <div className="flex w-full items-center py-4 px-6 border-b border-slate-400 select-none dark:bg-black dark:text-white">
+      <div className={`${!createBoardModal && "hidden"}`}>
+        <Overlay>
+          <div className="bg-white  relative min-h-[40vh] w-[30vw] rounded-md p-4 w">
+            <div
+              className="absolute cursor-pointer rounded-full bg-white bg-opacity-40 -right-12 h-10 w-10 -top-0 flex items-center justify-center"
+              onClick={() => setCreateBoardModal(false)}
+            >
+              <X />
+            </div>
+
+            <form action={onSubmit} className="w-full space-y-2">
+              <label htmlFor="title" className="font-medium">
+                Title <span className="text-red-500 align-super">**</span>{" "}
+              </label>
+              <input
+                type="text"
+                name="title"
+                placeholder="Issue Board..."
+                className="outline-none border border-black rounded-sm p-2 w-full text-sm mb-4"
+                autoFocus={true}
+              />
+              <label htmlFor="description" className="font-medium mt-4">
+                Description
+              </label>
+
+              <textarea
+                name="description"
+                id="description"
+                placeholder="This board is for tracking issues..."
+                rows={4}
+                className="outline-none border border-black rounded-sm p-2 w-full resize-none text-sm"
+              ></textarea>
+              {isLoading ? (
+                <Button
+                  disabled
+                  className="bg-primary text-white w-full flex items-center justify-center"
+                >
+                  <Loader2 /> Creating...
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  className="bg-primary text-white w-full flex items-center justify-center"
+                >
+                  Create Board
+                </Button>
+              )}
+            </form>
+          </div>
+        </Overlay>
+      </div>
+
       <div className="flex gap-2 text-nowrap mr-4">
         {/* <div>
           <Grip size={20} />
@@ -104,8 +181,11 @@ const Navbar = () => {
             </div>
           ))}
 
-          <div className="bg-primary text-white px-4 py-2 rounded-md">
-            Create
+          <div
+            className="bg-primary text-white px-4 py-2 rounded-md cursor-pointer"
+            onClick={() => setCreateBoardModal(true)}
+          >
+            Create Board
           </div>
         </div>
 

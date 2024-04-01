@@ -123,13 +123,6 @@ const page = () => {
             </div>
           </div>
         </div>
-        {/* <Skeleton className="w-[500px] h-[10px] bg-pink-300" /> */}
-
-        <div
-          className={
-            "animate-pulse rounded-md bg-primary/10 w-[500px] h-[10px] "
-          }
-        ></div>
       </div>
 
       {/* Status */}
