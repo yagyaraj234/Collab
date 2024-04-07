@@ -25,6 +25,7 @@ import { Button } from "../ui/button";
 import { useAction } from "@/hooks/use-action";
 import { createBoard } from "../../../action/create-board";
 import { toast } from "sonner";
+import { FormPopover } from "../form/form-popover";
 
 const navOption = [
   {
@@ -49,20 +50,20 @@ const Navbar = () => {
   const [selectedNavOption, setSelectedNavOption] = useState("");
   const [createBoardModal, setCreateBoardModal] = useState(false);
 
-  const { run, fieldErrors, isLoading } = useAction(createBoard, {
-    onSuccess: () => {
-      setCreateBoardModal(false);
-      toast.success("Board created successfully");
-    },
-    onError: () => {
-      console.log("error");
-    },
-  });
+  // const { run, fieldErrors, isLoading } = useAction(createBoard, {
+  //   onSuccess: () => {
+  //     setCreateBoardModal(false);
+  //     toast.success("Board created successfully");
+  //   },
+  //   onError: () => {
+  //     console.log("error");
+  //   },
+  // });
 
-  const onSubmit = (formData: FormData) => {
-    const title = formData.get("title") as string;
-    run({ title });
-  };
+  // const onSubmit = (formData: FormData) => {
+  //   const title = formData.get("title") as string;
+  //   run({ title });
+  // };
 
   //  });
   const ref = useRef<HTMLDivElement>(null); // Add type annotation for ref
@@ -85,7 +86,7 @@ const Navbar = () => {
 
   return (
     <div className="flex w-full items-center py-4 px-6 border-b border-slate-400 select-none dark:bg-black dark:text-white">
-      <div className={`${!createBoardModal && "hidden"}`}>
+      {/* <div className={`${!createBoardModal && "hidden"}`}>
         <Overlay>
           <div className="bg-white  relative min-h-[40vh] w-[30vw] rounded-md p-4 w">
             <div
@@ -135,7 +136,7 @@ const Navbar = () => {
             </form>
           </div>
         </Overlay>
-      </div>
+      </div> */}
 
       <div className="flex gap-2 text-nowrap mr-4">
         {/* <div>
@@ -181,12 +182,14 @@ const Navbar = () => {
             </div>
           ))}
 
-          <div
-            className="bg-primary text-white px-4 py-2 rounded-md cursor-pointer"
-            onClick={() => setCreateBoardModal(true)}
-          >
-            Create Board
-          </div>
+          <FormPopover align="start" side="bottom" sideOffset={18}>
+            <div
+              className="bg-primary text-white px-4 py-2 rounded-md cursor-pointer"
+              // onClick={() => setCreateBoardModal(true)}
+            >
+              Create Board
+            </div>
+          </FormPopover>
         </div>
 
         <div className="flex gap-2 items-center">

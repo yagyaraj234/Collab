@@ -2,6 +2,7 @@ import { Separator } from "@/components/ui/separator";
 import { Info } from "./_components/info";
 import Sidebar from "./_components/sidebar";
 import { BoardList } from "./_components/board-list";
+import { Suspense } from "react";
 
 const OrganizationPage = () => {
   return (
@@ -11,7 +12,10 @@ const OrganizationPage = () => {
 
       <div className="flex gap-4 ">
         <Sidebar />
-        <BoardList />
+
+        <Suspense fallback={<BoardList.Skeleton />}>
+          <BoardList />
+        </Suspense>
       </div>
     </div>
   );

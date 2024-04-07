@@ -1,17 +1,44 @@
-import { FormPopover } from "@/components/form/form-popover";
 import { Hint } from "./hint";
 import { HelpCircle, User2 } from "lucide-react";
-export const BoardList = () => {
+import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
+import Link from "next/link";
+
+import { db } from "@/lib/db";
+import { FormPopover } from "@/components/form/form-popover";
+import { Skeleton } from "@/components/ui/skeleton";
+
+export const BoardList = async () => {
+  const { orgId } = auth();
+  if (!orgId) return redirect("/select-org");
+
+  const boards = await db.board.findMany({
+    where: { orgId },
+    orderBy: { createdAt: "desc" },
+  });
   return (
     <div className="space-y-2 border-l-2 h-full pl-4">
-      <div className="flex items-center font-semibold text-left text-neutral-700 fotn">
+      <div className="flex items-center font-semibold text-left text-neutral-700 mb-6">
         <User2 className="h- w-6 mr-2" />
         Your boards
       </div>
+
       <div
         className="grid grid-cols-2
          sm:grid-cols-3 lg:grid-cols-3 gap-4"
       >
+        {boards.map((board) => (
+          <Link
+            href={`/board/${board.id}`}
+            key={board.id}
+            className="group relative aspect-video bg-no-repeat bg-cover bg-sky-700 rounded-sm p-2 overflow-hidden  hover:opacity-75 transition text-neutral-700 "
+            style={{ backgroundImage: `url(${board.imageThumbUrl})` }}
+          >
+            <div className="text-white font-medium text-[14px]">
+              {board.title}
+            </div>
+          </Link>
+        ))}
         <FormPopover sideOffset={10} side={`right`}>
           <div
             role="button"
@@ -28,6 +55,20 @@ export const BoardList = () => {
           </div>
         </FormPopover>
       </div>
+    </div>
+  );
+};
+
+BoardList.Skeleton = () => {
+  return (
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      <Skeleton className="aspect-video h-full w-full p-2 min-w-[160px]" />
+      <Skeleton className="aspect-video h-full w-full p-2 min-w-[160px]" />
+      <Skeleton className="aspect-video h-full w-full p-2 min-w-[160px]" />
+      <Skeleton className="aspect-video h-full w-full p-2 min-w-[160px]" />
+      <Skeleton className="aspect-video h-full w-full p-2 min-w-[160px]" />
+      <Skeleton className="aspect-video h-full w-full p-2 min-w-[160px]" />
+      <Skeleton className="aspect-video h-full w-full p-2 min-w-[160px]" />
     </div>
   );
 };

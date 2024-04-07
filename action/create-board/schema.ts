@@ -12,4 +12,8 @@ export const CreateBoard = z.object({
     .max(45, {
       message: "Title must be at most 45 characters",
     }),
+  image: z.string({
+    required_error: "Image is required",
+    invalid_type_error: "Image is required",
+  }),
 });
