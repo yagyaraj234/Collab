@@ -41,8 +41,7 @@ model List {
   createdBy String
   
  
-
-  board     Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  board     Board @relation(fields: [boardId], references: [id], onDelete: Cascade)
 
  
 

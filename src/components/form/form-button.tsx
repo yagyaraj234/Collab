@@ -8,7 +8,14 @@ interface FormButtonProps {
   children: React.ReactNode;
   disabled?: boolean;
   className?: string;
-  variant?: "default" | "destrutive" | "secondary";
+  variant?:
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link"
+    | "transparent";
 }
 
 export const FormSubmitButton = ({
@@ -23,6 +30,7 @@ export const FormSubmitButton = ({
       disabled={pending || disabled}
       size={"sm"}
       className={cn(className)}
+      variant={variant || "default"}
     >
       {children}
     </Button>
