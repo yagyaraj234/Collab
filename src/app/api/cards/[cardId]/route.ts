@@ -13,14 +13,13 @@ export async function GET(
     };
   }
 ) {
-  console.log("hello");
   try {
     const { orgId, userId } = auth();
 
     if (!orgId || !userId) {
       return new NextResponse("Unauthorized", { status: 401 });
-      }
-      
+    }
+
     const card = await db.card.findUnique({
       where: {
         id: params.cardId,

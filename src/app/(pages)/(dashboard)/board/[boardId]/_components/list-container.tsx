@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
-import { ListWithCards } from "../../../../../../types";
+import { ListWithCards } from "../../../../../../../types";
 import { ListForm } from "./list-form";
 import { ListItems } from "./list-items";
 
 import { useAction } from "@/hooks/use-action";
-import { updateListOrder } from "../../../../../../action/update-list-order";
-import { updateCardOrder } from "../../../../../../action/update-card-order";
+import { updateListOrder } from "../../../../../../../action/update-list-order";
+import { updateCardOrder } from "../../../../../../../action/update-card-order";
 import { exec } from "child_process";
 
 interface ListContainerProps {

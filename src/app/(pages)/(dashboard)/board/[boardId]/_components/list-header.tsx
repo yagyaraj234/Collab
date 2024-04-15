@@ -13,7 +13,7 @@ export const ListHeader = ({ data, onAddCard }: ListHeaderProps) => {
     <div className="pt-2 px-2 text-sm font-semibold flex justify-center items-start gap-x-2">
       <div className="w-full text-sm px-2.5 py-1 h-7 font-medium border-transparent flex justify-between items-center">
         {data.title}
-        <ListOption  data={data} onAddCard={onAddCard} />
+        <ListOption data={data} onAddCard={onAddCard} />
       </div>
     </div>
   );

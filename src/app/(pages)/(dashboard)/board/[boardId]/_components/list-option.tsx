@@ -13,9 +13,9 @@ import {
 import { MoreHorizontal, X } from "lucide-react";
 import { FormSubmitButton } from "@/components/form/form-button";
 import { useAction } from "@/hooks/use-action";
-import { deleteList } from "../../../../../../action/delete-list";
+import { deleteList } from "../../../../../../../action/delete-list";
 import { toast } from "sonner";
-import { copyList } from "../../../../../../action/copy-list";
+import { copyList } from "../../../../../../../action/copy-list";
 
 interface ListOptionProps {
   data: List;

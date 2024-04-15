@@ -1,22 +1,27 @@
 "use server";
 
-import { db } from "@/lib/db";
-import { InputType, OutputType } from "./types";
 import { auth } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
+import { currentUser } from "@clerk/nextjs/server";
+import { ACTION, ENTITY_TYPE } from "@prisma/client";
+
+import { db } from "@/lib/db";
+import { InputType, OutputType } from "./types";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { CreateCard } from "./schema";
+import { createAuditLog } from "@/lib/create-audit-log";
 
 const handler = async (data: InputType): Promise<OutputType> => {
   const { userId, orgId } = auth();
+  const user = await currentUser();
 
-  if (!userId || !orgId) {
+  if (!userId || !orgId || !user) {
     return {
       error: "Unauthorized",
     };
   }
 
-  const { title, boardId, listId } = data;
+  const { title, boardId, listId, description } = data;
   let card;
   try {
     const board = await db.board.findUnique({
@@ -63,9 +68,17 @@ const handler = async (data: InputType): Promise<OutputType> => {
         title,
         listId,
         order: newOrder,
-        createdBy: userId,
-        assignedTo: "", // Add the missing assignedTo property
+        createdBy: user?.firstName + " " + user?.lastName,
+        assignedTo: "",
+        description: description || "",
       },
+    });
+
+    await createAuditLog({
+      entityId: card.id,
+      entityType: ENTITY_TYPE.CARD,
+      entityTitle: card.title,
+      action: ACTION.CREATE,
     });
   } catch (error) {
     return {

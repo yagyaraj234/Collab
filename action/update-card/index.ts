@@ -1,11 +1,12 @@
 "use server";
 
-import { db } from "@/lib/db";
-import { InputType, OutputType } from "./types";
 import { auth } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
+
+import { db } from "@/lib/db";
+import { InputType, OutputType } from "./types";
 import { createSafeAction } from "@/lib/create-safe-action";
-import { UpdateBoard } from "./schema";
+import { UpdateCard } from "./schema";
 import { createAuditLog } from "@/lib/create-audit-log";
 import { ACTION, ENTITY_TYPE } from "@prisma/client";
 
@@ -18,18 +19,27 @@ const handler = async (data: InputType): Promise<OutputType> => {
     };
   }
 
-  let board;
+  const { id, boardId, ...values } = data;
+
+  let card;
   try {
-    board = await db.board.update({
-      where: { id: data.id, orgId },
+    card = await db.card.update({
+      where: {
+        id: data.id,
+        list: {
+          board: {
+            orgId,
+          },
+        },
+      },
       data: {
-        title: data.title,
+        ...values,
       },
     });
     await createAuditLog({
-      entityId: board.id,
-      entityType: ENTITY_TYPE.LIST,
-      entityTitle: board.title,
+      entityId: card.id,
+      entityType: ENTITY_TYPE.CARD,
+      entityTitle: card.title,
       action: ACTION.UPDATE,
     });
   } catch (error) {
@@ -38,8 +48,8 @@ const handler = async (data: InputType): Promise<OutputType> => {
     };
   }
 
-  revalidatePath(`/board/${data.id}`);
-  return { data: board };
+  revalidatePath(`/board/${boardId}`);
+  return { data: card };
 };
 
-export const updateBoard = createSafeAction(UpdateBoard, handler);
+export const updateCard = createSafeAction(UpdateCard, handler);

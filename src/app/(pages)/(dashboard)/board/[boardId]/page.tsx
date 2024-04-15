@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 import { db } from "@/lib/db";
 
-import { ListContainer } from "./list-container";
+import { ListContainer } from "./_components/list-container";
 
 interface BoardIdPageProps {
   params: {

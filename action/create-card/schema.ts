@@ -16,5 +16,6 @@ export const CreateCard = z.object({
   }),
   listId: z.string({
     required_error: "List ID is required",
-  })
+  }),
+  description: z.string().optional(),
 });

@@ -11,7 +11,7 @@ import { FormSubmitButton } from "@/components/form/form-button";
 import { Button } from "@/components/ui/button";
 import { useAction } from "@/hooks/use-action";
 import { toast } from "sonner";
-import { createList } from "../../../../../../action/create-list";
+import { createList } from "../../../../../../../action/create-list";
 
 export const ListForm = () => {
   const params = useParams();

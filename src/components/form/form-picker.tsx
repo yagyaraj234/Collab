@@ -7,7 +7,7 @@ import { useFormStatus } from "react-dom";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { FormErrors } from "./form-errors";
-import { unsplashImages } from "@/constant";
+import { unsplashImages } from "@/constants/image";
 
 interface FormPickerProps {
   id: string;

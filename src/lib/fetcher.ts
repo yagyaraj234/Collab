@@ -1,1 +1,17 @@
-export const fetcher = (url: string) => fetch(url).then((res) => res.json());
+export const fetcher = async (url: string) => {
+  // console.log("fetching", url);
+  if (url.includes("undefined")) {
+    return null;
+  }
+
+  const response: any = await fetch(url);
+  // console.log("response", response);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message);
+  }
+
+  console.log(data);
+  return data;
+};

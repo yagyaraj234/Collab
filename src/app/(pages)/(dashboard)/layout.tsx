@@ -12,6 +12,7 @@ const OrganizationLayout = ({ children }: { children: React.ReactNode }) => {
         <Navbar />
         <ModalProvider />
         {children}
+
         <Toaster />
       </QueryProvider>
     </ClerkProvider>

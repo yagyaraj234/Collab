@@ -2,57 +2,52 @@
 
 import { db } from "@/lib/db";
 import { InputType, OutputType } from "./types";
-import { auth } from "@clerk/nextjs";
+import { auth, currentUser } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
 import { createSafeAction } from "@/lib/create-safe-action";
-import { DeleteList } from "./schema";
+import { DeleteCard } from "./schema";
 import { createAuditLog } from "@/lib/create-audit-log";
 import { ACTION, ENTITY_TYPE } from "@prisma/client";
 
 const handler = async (data: InputType): Promise<OutputType> => {
   const { userId, orgId } = auth();
 
-  if (!userId || !orgId) {
+  const user = await currentUser();
+
+  if (!userId || !orgId || !user) {
     return {
       error: "Unauthorized",
     };
   }
 
   const { id, boardId } = data;
-  console.log({ id, boardId });
-  let list;
+  // console.log({ id, boardId });
+  let card;
   try {
-    const board = await db.board.findUnique({
-      where: {
-        id: boardId,
-        orgId,
-      },
-    });
-    if (!board) {
-      return {
-        error: "Board not found",
-      };
-    }
-
-    list = await db.list.delete({
+    card = await db.card.delete({
       where: {
         id,
+        list: {
+          board: {
+            orgId,
+          },
+        },
       },
     });
     await createAuditLog({
-      entityId: list.id,
-      entityType: ENTITY_TYPE.LIST,
-      entityTitle: list.title,
+      entityId: card.id,
+      entityType: ENTITY_TYPE.CARD,
+      entityTitle: card.title,
       action: ACTION.DELETE,
     });
   } catch (error) {
     return {
-      error: "Failed to create list",
+      error: "Failed to copy list",
     };
   }
 
   revalidatePath(`/board/${boardId}`);
-  return { data: list };
+  return { data: card };
 };
 
-export const deleteList = createSafeAction(DeleteList, handler);
+export const deleteCard = createSafeAction(DeleteCard, handler);

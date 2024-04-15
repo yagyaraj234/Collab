@@ -3,7 +3,7 @@
 import { ElementRef, useRef, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 
-import { ListWithCards } from "../../../../../../types";
+import { ListWithCards } from "../../../../../../../types";
 import { ListHeader } from "./list-header";
 import { CardForm } from "./card-form";
 import { cn } from "@/lib/utils";
