@@ -91,7 +91,7 @@ export const Description = ({ data }: DescriptionProps) => {
                 id="description"
                 placeholder="Add a more detailed description"
                 defaultValue={data?.description || undefined}
-                className="w-full h-[78px] text-black"
+                className="w-full h-[160px] text-black"
               />
               <div className="flex gap-x-2 mt-2">
                 <FormSubmitButton>Save</FormSubmitButton>
@@ -109,7 +109,7 @@ export const Description = ({ data }: DescriptionProps) => {
             <div
               onClick={enableEditing}
               role="button"
-              className="flex min-h-[78px] w-full bg-neutral-200 text-sm font-medium px-3.5 rounded-md py-3 "
+              className="flex h-[160px] w-full bg-neutral-200 text-sm font-medium px-3.5 rounded-md py-3 "
             >
               {data.description || "Add a more detailed description..."}
             </div>
@@ -128,7 +128,7 @@ Description.Skeleton = () => {
         <Skeleton className="h-5 w-24 bg-neutral-200" />
       </div>
 
-      <Skeleton className="min-h-[78px] w-full" />
+      <Skeleton className="min-h-[160px] w-full" />
     </div>
   );
 };

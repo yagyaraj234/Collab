@@ -12,6 +12,5 @@ export const fetcher = async (url: string) => {
     throw new Error(data.message);
   }
 
-  console.log(data);
   return data;
 };

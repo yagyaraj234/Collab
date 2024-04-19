@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { useParams } from "next/navigation";
-import { Copy, Trash } from "lucide-react";
+import { ChevronDown, Copy, Trash } from "lucide-react";
 import { toast } from "sonner";
 
 import { Skeleton } from "@/components/ui/skeleton";
@@ -11,6 +12,9 @@ import { useAction } from "@/hooks/use-action";
 import { copyCard } from "../../../../action/copy-card";
 import { deleteCard } from "../../../../action/delete-card";
 import { useCardModal } from "@/hooks/use-card-modal";
+import { SelectDueDate } from "./select_duedate";
+import { AssignCard } from "./assigned-card";
+import { CardStatus } from "./card-status";
 
 interface CardActionProps {
   data: CardWithList;
@@ -19,6 +23,11 @@ export const CardAction = ({ data }: CardActionProps) => {
   const params = useParams();
 
   const cardModal = useCardModal();
+
+  // States
+
+  const [showMore, setShowMore] = useState<boolean>(false);
+
   // Actions
   const { run: runDeleteCard, isLoading: isDeleteLoading } = useAction(
     deleteCard,
@@ -64,25 +73,53 @@ export const CardAction = ({ data }: CardActionProps) => {
 
   return (
     <div className="space-y-2 mt-2">
-      <p className="text-xs font-semibold">Actions</p>
-      <Button
-        onClick={onCopy}
-        disabled={isCopyLoading}
-        variant={`gray`}
-        size="inline"
-        className="w-full justify-start"
-      >
-        <Copy className="h-4 w-4 mr-2" /> Copy
-      </Button>
-      <Button
-        onClick={onDelete}
-        disabled={isDeleteLoading}
-        variant={`gray`}
-        size="inline"
-        className="w-full justify-start"
-      >
-        <Trash className="h-4 w-4 mr-2" /> Delete
-      </Button>
+      <p className="text-xs font-semibold">Due date:</p>
+      <SelectDueDate data={data} />
+
+      {/* <p className="text-xs font-semibold">Assigned to:</p>
+      <AssignCard data={data} /> */}
+
+      <p className="text-xs font-semibold">Status:</p>
+      <CardStatus data={data} />
+
+      {showMore && (
+        <>
+          <Button
+            onClick={onCopy}
+            disabled={isCopyLoading}
+            variant={`gray`}
+            size="inline"
+            className="w-full justify-start"
+          >
+            <Copy className="h-4 w-4 mr-2" /> Copy
+          </Button>
+          <Button
+            onClick={onDelete}
+            disabled={isDeleteLoading}
+            variant={`gray`}
+            size="inline"
+            className="w-full justify-start"
+          >
+            <Trash className="h-4 w-4 mr-2" /> Delete
+          </Button>
+        </>
+      )}
+
+      {showMore ? (
+        <div
+          className="text-sm border border-slate-200 flex items-center  w-full p-2 rounded-md text-black cursor-pointer justify-between"
+          onClick={() => setShowMore(!showMore)}
+        >
+          <div>Show less</div> <ChevronDown className="h-4 w-4  rotate-180" />
+        </div>
+      ) : (
+        <div
+          className="text-sm border border-slate-200 flex items-center  w-full p-2 rounded-md text-black cursor-pointer justify-between font-medium"
+          onClick={() => setShowMore(!showMore)}
+        >
+          <div>Show more actions</div> <ChevronDown className="h-4 w-4 " />
+        </div>
+      )}
     </div>
   );
 };

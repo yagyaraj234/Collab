@@ -17,6 +17,7 @@ import { createBoard } from "../../../action/create-board";
 import { toast } from "sonner";
 import { FormPicker } from "./form-picker";
 import { useRouter } from "next/navigation";
+import { useUpgradeModal } from "@/hooks/use-upgrade-model";
 
 interface FormPopoverProps {
   children: React.ReactNode;
@@ -33,6 +34,9 @@ export const FormPopover = ({
 }: FormPopoverProps) => {
   const router = useRouter();
   const closeRef = useRef(null);
+
+  const upgradeModal = useUpgradeModal();
+
   const { run, fieldErrors } = useAction(createBoard, {
     onSuccess: (data) => {
       (closeRef.current as unknown as HTMLElement)?.click();
@@ -40,7 +44,8 @@ export const FormPopover = ({
       router.push(`/board/${data.id}`);
     },
     onError: (error) => {
-      console.log("Error creating board", error);
+      toast.error(error);
+      upgradeModal.onOpen();
     },
   });
 

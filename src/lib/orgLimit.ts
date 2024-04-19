@@ -3,7 +3,7 @@ import { auth } from "@clerk/nextjs";
 import { db } from "./db";
 import { MAX_FREE_BOARDS } from "@/constants/board";
 
-export const increarementAvailableBoards = async () => {
+export const incrementAvailableBoards = async () => {
   const { orgId } = auth();
 
   if (!orgId) {

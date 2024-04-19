@@ -7,6 +7,9 @@ import Link from "next/link";
 import { db } from "@/lib/db";
 import { FormPopover } from "@/components/form/form-popover";
 import { Skeleton } from "@/components/ui/skeleton";
+import { MAX_FREE_BOARDS } from "@/constants/board";
+import { getAvailableCount } from "@/lib/orgLimit";
+import { checkSubscription } from "@/lib/subscription";
 
 export const BoardList = async () => {
   const { orgId } = auth();
@@ -16,8 +19,12 @@ export const BoardList = async () => {
     where: { orgId },
     orderBy: { createdAt: "desc" },
   });
+
+  const availableCount = await getAvailableCount();
+  const isPro = await checkSubscription();
+
   return (
-    <div className="space-y-2 border-l-2 h-full pl-4">
+    <div className="space-y-2  h-full ">
       <div className="flex items-center font-semibold text-left text-neutral-700 mb-6">
         <User2 className="h- w-6 mr-2" />
         Your boards
@@ -45,7 +52,11 @@ export const BoardList = async () => {
             className="aspect-video relative h-full w-full bg-muted rounded-sm flex flex-col gap-y-1 items-center justify-center hover:opacity-75 transition p-4 text-neutral-700 "
           >
             <p className="text-sm">Create new board</p>
-            <span className="text-xs">5 remaining</span>
+            <span className="text-xs">
+              {isPro
+                ? "Unlimited"
+                : `${MAX_FREE_BOARDS - availableCount} remaining`}
+            </span>
             <Hint
               sideOffset={40}
               description="Free Plan you can create maximum 5 board upgrade to higher plan to create more boards"
