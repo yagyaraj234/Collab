@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { CardModal } from "@/components/modals/card-modal";
-import { UpgradeModal } from "../../upgrade-modal";
+import { UpgradeModal } from "@/components/modals/upgrade-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);

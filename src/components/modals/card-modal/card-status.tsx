@@ -1,7 +1,7 @@
 "use client";
+
 import { useState } from "react";
 import { toast } from "sonner";
-import { useOrganizationList } from "@clerk/nextjs";
 
 import { CardWithList } from "../../../../types";
 
