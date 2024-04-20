@@ -7,7 +7,7 @@ import { ActivityItem } from "@/components/activity-item";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface ActivityProps {
-  items: AuditLog[];
+  items: AuditLog[] | undefined;
 }
 
 export const Activity = ({ items }: ActivityProps) => {

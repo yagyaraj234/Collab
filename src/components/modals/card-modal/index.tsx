@@ -38,8 +38,10 @@ export const CardModal = () => {
               ) : (
                 <Description.Skeleton />
               )}
+
               {auditData ? (
-                <Activity items={auditData} />
+                // @ts-ignore
+                <Activity items={auditData!} /> // Wrap auditData in an array
               ) : (
                 <Activity.Skeleton />
               )}
