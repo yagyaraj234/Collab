@@ -76,6 +76,8 @@ export const Header = ({ data }: HeaderProps) => {
   );
 };
 
+Header.displayName = "Header";
+
 Header.Skeleton = () => {
   return (
     <div className="flex items-start gap-x-3 mb-6">

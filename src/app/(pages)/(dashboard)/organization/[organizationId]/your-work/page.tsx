@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Metadata } from "next";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
+import Image from "next/image";
 
 // export const metadata: Metadata = {
 //   title: 'Your Work || Collab',
@@ -89,8 +90,9 @@ const page = () => {
               <div className="h-full w-8 bg-orange-500 box-content absolute top-0 left-0 rounded-l-lg z-0"></div>
               <div className="flex gap-2  ">
                 <div className=" rounded-lg max-h-[32px] overflow-hidden max-w-[32px] z-10">
-                  <img
+                  <Image
                     src="https://images.unsplash.com/photo-1493612276216-ee3925520721?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzZ8fHdvcmslMjBpY29ufGVufDB8fDB8fHww"
+                    fill
                     alt=""
                     className="rounded-lg"
                   />

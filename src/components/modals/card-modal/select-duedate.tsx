@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 import { useAction } from "@/hooks/use-action";
@@ -41,6 +41,10 @@ export const SelectDueDate = ({ data }: SelectDueDateProps) => {
   });
 
   useEffect(() => {
+    callFunction();
+  }, [dueDate]);
+
+  const callFunction = useCallback(() => {
     console.log(dueDate, data.dueDate);
     if (dueDate && dueDate !== data.dueDate) {
       run({

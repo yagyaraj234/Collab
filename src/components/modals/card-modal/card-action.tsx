@@ -133,3 +133,5 @@ CardAction.Skeleton = () => {
     </div>
   );
 };
+
+CardAction.displayName = "CardAction";

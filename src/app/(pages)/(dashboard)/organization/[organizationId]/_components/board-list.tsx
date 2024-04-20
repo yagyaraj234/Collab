@@ -32,13 +32,13 @@ export const BoardList = async () => {
 
       <div
         className="grid grid-cols-2
-         sm:grid-cols-3 lg:grid-cols-3 gap-4"
+         sm:grid-cols-3 lg:grid-cols-4 gap-4"
       >
         {boards.map((board) => (
           <Link
             href={`/board/${board.id}`}
             key={board.id}
-            className="group relative aspect-video bg-no-repeat bg-cover bg-sky-700 rounded-sm p-2 overflow-hidden  hover:opacity-75 transition text-neutral-700 "
+            className="group relative aspect-video bg-no-repeat bg-cover bg-sky-700 rounded-sm p-2 overflow-hidden  hover:opacity-75 transition text-neutral-700 min-w-[200px] min-h-[120px]"
             style={{ backgroundImage: `url(${board.imageThumbUrl})` }}
           >
             <div className="text-white font-medium text-[14px]">
@@ -73,13 +73,15 @@ export const BoardList = async () => {
 BoardList.Skeleton = () => {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-      <Skeleton className="aspect-video h-full w-full p-2 min-w-[160px]" />
-      <Skeleton className="aspect-video h-full w-full p-2 min-w-[160px]" />
-      <Skeleton className="aspect-video h-full w-full p-2 min-w-[160px]" />
-      <Skeleton className="aspect-video h-full w-full p-2 min-w-[160px]" />
-      <Skeleton className="aspect-video h-full w-full p-2 min-w-[160px]" />
-      <Skeleton className="aspect-video h-full w-full p-2 min-w-[160px]" />
-      <Skeleton className="aspect-video h-full w-full p-2 min-w-[160px]" />
+      <Skeleton className="aspect-video h-full w-full p-2 min-w-[200px] min-h-[120px]" />
+      <Skeleton className="aspect-video h-full w-full p-2 min-w-[200px] min-h-[120px]" />
+      <Skeleton className="aspect-video h-full w-full p-2 min-w-[200px] min-h-[120px]" />
+      <Skeleton className="aspect-video h-full w-full p-2 min-w-[200px] min-h-[120px]" />
+      <Skeleton className="aspect-video h-full w-full p-2 min-w-[200px] min-h-[120px]" />
+      <Skeleton className="aspect-video h-full w-full p-2 min-w-[200px] min-h-[120px]" />
+      <Skeleton className="aspect-video h-full w-full p-2 min-w-[200px] min-h-[120px]" />
     </div>
   );
 };
+
+BoardList.displayName = "BoardList";
