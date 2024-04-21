@@ -7,9 +7,31 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useAction } from "@/hooks/use-action";
 import { X, MoreHorizontal, Trash } from "lucide-react";
+import { deleteBoard } from "../../../../../../../action/delete-board";
+import { toast } from "sonner";
+import { useParams, useRouter } from "next/navigation";
 
 export const DeleteBoard = () => {
+  const params = useParams();
+
+  const router = useRouter();
+
+  const { run, isLoading } = useAction(deleteBoard, {
+    onSuccess: () => {
+      toast.success("Board deleted successfully");
+      router.push(`organization/${params.organizationId}`);
+    },
+    onError: (error) => {
+      toast.error("Failed to delete board");
+    },
+  });
+
+  const onDelete = async () => {
+    const boardId = params.boardId as string;
+    await run({ boardId });
+  };
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -35,9 +57,8 @@ export const DeleteBoard = () => {
         </PopoverClose> */}
         <Button
           variant="ghost"
-          //    TODO: Implement onDelete
-          //   onClick={onDelete}
-          //   disabled={isLoading}
+          onClick={onDelete}
+          disabled={isLoading}
           className="rounded-none w-full h-auto p-1 px-2  justify-start font-medium text-sm flex gap-4 items-center "
         >
           <Trash className="h-4 w-4" /> Delete board
