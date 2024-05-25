@@ -82,7 +82,7 @@ const Navbar = () => {
 
       <div className="flex justify-between w-full items-center text-sm relative">
         <div className="flex flex-row gap-2 text-textPrimary font-medium">
-          {navOption?.map((option, index) => (
+          {/* {navOption?.map((option, index) => (
             <div
               className={`flex gap-0.5 duration-300 transition-all ease-in-out py-1.5 px-2 rounded-md cursor-pointer font-semibold  items-center justify-center relative ${
                 selectedNavOption === option.name
@@ -109,7 +109,7 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-          ))}
+          ))} */}
 
           <FormPopover align="start" side="bottom" sideOffset={18}>
             <div
@@ -122,13 +122,13 @@ const Navbar = () => {
         </div>
 
         <div className="flex gap-2 items-center">
-          <div className="flex items-center gap-1 border-2 rounded-md p-1">
+          {/* <div className="flex items-center gap-1 border-2 rounded-md p-1">
             <Search size={20} />
             <input type="text" placeholder="Search" className="outline-none" />
-          </div>
-          <div className="-rotate-5 cursor-pointer">
+          </div> */}
+          {/* <div className="-rotate-5 cursor-pointer">
             <Bell />
-          </div>
+          </div> */}
 
           <div
             onClick={() => setSelectedNavOption("help")}
@@ -137,7 +137,7 @@ const Navbar = () => {
             <HelpCircle />
           </div>
 
-          <div
+          {/* <div
             className="cursor-pointer relative"
             onClick={() => setSelectedNavOption("Setting")}
           >
@@ -151,7 +151,7 @@ const Navbar = () => {
                 <SettingCard />
               </div>
             )}
-          </div>
+          </div> */}
 
           {selectedNavOption === "help" && (
             <div

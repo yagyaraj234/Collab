@@ -14,13 +14,6 @@ const Header = () => {
         <span className="font-semibold">Collab</span>
       </Link>
 
-      {/* <nav className="hidden items-center gap-4 text-lg font-medium lg:flex">
-        <Link href="/">Home</Link>
-        <Link href="#">Features</Link>
-        <Link href="/pricing">Pricing</Link>
-        <Link href="#">Contact </Link>
-      </nav> */}
-
       <div>
         <UserButton />
       </div>

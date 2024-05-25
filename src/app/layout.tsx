@@ -20,7 +20,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={`${inter.className}  overflow-y-auto  scrollbar-thin scrollbar-track-slate-50 scrollbar-thumb-slate-400`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

@@ -17,10 +17,10 @@ const Sidebar = () => {
       // href: "/dashboard/organization/[organizationId]",
       href: `/organization/${params.organizationId}`,
     },
-    {
-      name: "Members",
-      href: `/organization/${params.organizationId}/members`,
-    },
+    // {
+    //   name: "Members",
+    //   href: `/organization/${params.organizationId}/members`,
+    // },
     // {
     //   name: "Boards",
     //   href: "/boards",
@@ -42,7 +42,7 @@ const Sidebar = () => {
             item.name === nav && "bg-slate-200"
           } `}
           onClick={() => {
-            useNavOption.getState().setNavValue(item.name); 
+            useNavOption.getState().setNavValue(item.name);
             router.push(item.href);
           }}
           key={item.name}
