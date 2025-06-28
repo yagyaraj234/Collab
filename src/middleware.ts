@@ -12,7 +12,6 @@ export default authMiddleware({
     "/signup",
     "/forgot-password",
     "/reset-password",
-    "/select-org",
     "/organization/[orgId]",
   ],
   afterAuth(auth, req) {
